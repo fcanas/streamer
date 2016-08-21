@@ -401,7 +401,7 @@ The preferred point to start playing a playlist.
   * `EXT-X-PLAYLIST-TYPE` tag with a value of `EVENT` and the `EXT-X-ENDLIST` is present
 * On first load, or subsequent load with new content, client must wait at least _target duration_ before reloading
 * On subsequent loads with no new content, client must wait at least one half of _target duration_ before reloading
-* Subsequent loads should verify that segment sequence number and URI are stable _w.r.t._ previous loads, and fail otherwise die to server error.
+* Subsequent loads should verify that segment sequence number and URI are stable _w.r.t._ previous loads, and fail otherwise due to server error.
 * Do *not* use Media Sequence Number to synchronize between streams. Load single alternate playlist, and use time stamps to synchronize.
 
 #### Decryption
