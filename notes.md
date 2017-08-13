@@ -1,6 +1,6 @@
 # Notes From HLS Draft Spec
 
-[HTTP Live Streaming](https://tools.ietf.org/html/draft-pantos-http-live-streaming-20)
+[HTTP Live Streaming](https://tools.ietf.org/html/draft-pantos-http-live-streaming-23)
 
 This is not intended to replace above linked document. Expect errors,
 simplifications, and editorialization.
