@@ -305,9 +305,7 @@ Compatibility 4 or greater. A little unclear, but each media segment needs to co
 | `CODECS`      | should be | quoted-string          | comma-separated list of formats [RFC6381](https://tools.ietf.org/html/rfc6381) |
 | `RESOLUTION`  | NO        | decimal-resolution     | Recommended for video content |
 | `FRAME-RATE`  | NO        | decimal-floating-point | Maximum frame rate for all video in the variant stream. Rounded to 3 decimal places. Should be present if video is ever >30fps |
-| `HDCP-LEVEL`  | NO        | enumerated-string      | `TYPE-0` or `NONE`. Should be present if conten't won't play without [HDCP](http://www.digital-cp.com/sites/default/
-              files/specifications/
-              HDCP%20on%20HDMI%20Specification%20Rev2_2_Final1.pdf). Clients without copy protection shoudn't load a variant with `HDCP-LEVEL` that isn't `NONE`. |
+| `HDCP-LEVEL`  | NO        | enumerated-string      | `TYPE-0` or `NONE`. Should be present if conten't won't play without [HDCP](http://www.digital-cp.com/sites/default/files/specifications/HDCP%20on%20HDMI%20Specification%20Rev2_2_Final1.pdf). Clients without copy protection shoudn't load a variant with `HDCP-LEVEL` that isn't `NONE`. |
 | `AUDIO`       | NO        | quoted-string          | Must match GROUP-ID attribute of an EXT-X-MEDIA tag with an `AUDIO` type |
 | `VIDEO`       | NO        | quoted-string          | Must match GROUP-ID attribute of an EXT-X-MEDIA tag with an `VIDEO` type |
 | `SUBTITLES`   | NO        | quoted-string          | Must match GROUP-ID attribute of an EXT-X-MEDIA tag with an `SUBTITLES` type |
