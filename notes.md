@@ -1,13 +1,13 @@
 # Notes From HLS Draft Spec
 
-[HTTP Live Streaming](https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-1)
+[HTTP Live Streaming](https://tools.ietf.org/html/draft-pantos-http-live-streaming-23)
 
 This is not intended to replace above linked document. Expect errors,
 simplifications, and editorialization.
 
 ## Overview of Playlists and Streams
 
-* Playlists must be UTF-8 according to [draft](https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-1)
+* Playlists must be UTF-8
 * Master Playlists
 * Variant Streams
 * Media Playlists
@@ -189,7 +189,7 @@ Media initialization
 Associates the first sample of the segment with an absolute date. Applies only to the next segment. The date/time is formatted in [ISO-8601](https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#ref-ISO_8601) and should both indicate time zone and fractional seconds. It _should_ provide millisecond accuracy.
 
 ```
-#EXT-X-PROGRAM-DATE-TIME:<YYYY-MM-DDThh:mm:ssZ>
+#EXT-X-PROGRAM-DATE-TIME:<YYYY-MM-DDThh:mm:SSSZ>
 ```
 
 ### `EXT-X-DATERANGE`
@@ -287,6 +287,7 @@ Compatibility 4 or greater. A little unclear, but each media segment needs to co
 | `FORCED`   | NO       | enumerated-string | `YES` or `NO`. Absence is implicit `NO`. Must only appear for `TYPE=SUBTITLES`. `YES` means content is essential (_e.g._ Elvish?) |
 | `INSTREAM-ID` | NO    | quoted-string     | For closed-captions. See spec |
 | `CHARACTERISTICS` | NO | quoted-string    | comma-separated UTIs |
+| `CHANNELS`  | NO      | quoted-string     | "/"-separated list of parameters. The first is the maximum number of independent audio channels. Should be present if `TYPE` is `AUDIO`. Required if a Master Playlist contains two renditions encoded with the same codec but a different number of channels. |
 
 [Rendition groups](https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-4.3.4.1.1) represent alternate rendition of the same content. They need the same `GROUP-ID`, different `NAME`, no more than one `DEFAULT` member, and `AUTOSELECT` members must have a `LANGUAGE` attribute.
 
@@ -304,6 +305,7 @@ Compatibility 4 or greater. A little unclear, but each media segment needs to co
 | `CODECS`      | should be | quoted-string          | comma-separated list of formats [RFC6381](https://tools.ietf.org/html/rfc6381) |
 | `RESOLUTION`  | NO        | decimal-resolution     | Recommended for video content |
 | `FRAME-RATE`  | NO        | decimal-floating-point | Maximum frame rate for all video in the variant stream. Rounded to 3 decimal places. Should be present if video is ever >30fps |
+| `HDCP-LEVEL`  | NO        | enumerated-string      | `TYPE-0` or `NONE`. Should be present if conten't won't play without [HDCP](http://www.digital-cp.com/sites/default/files/specifications/HDCP%20on%20HDMI%20Specification%20Rev2_2_Final1.pdf). Clients without copy protection shoudn't load a variant with `HDCP-LEVEL` that isn't `NONE`. |
 | `AUDIO`       | NO        | quoted-string          | Must match GROUP-ID attribute of an EXT-X-MEDIA tag with an `AUDIO` type |
 | `VIDEO`       | NO        | quoted-string          | Must match GROUP-ID attribute of an EXT-X-MEDIA tag with an `VIDEO` type |
 | `SUBTITLES`   | NO        | quoted-string          | Must match GROUP-ID attribute of an EXT-X-MEDIA tag with an `SUBTITLES` type |
@@ -328,7 +330,6 @@ When an `EXT-X-STREAM-INF` tag contains an `AUDIO`, `VIDEO`, `SUBTITLES`, or `CL
 | `AVERAGE-BANDWIDTH` | NO  | decimal-integer        | Bits per second |
 | `CODECS`      | should be | quoted-string          | comma-separated list of formats [RFC6381](https://tools.ietf.org/html/rfc6381) |
 | `RESOLUTION`  | NO        | decimal-resolution     | Recommended for video content |
-| `FRAME-RATE`  | NO        | decimal-floating-point | Maximum frame rate for all video in the variant stream. Rounded to 3 decimal places. Should be present if video is ever >30fps |
 | `URI`         | NO        | quoted-string          | Identifies media playlist file |
 
 ### `EXT-X-SESSION-DATA`
