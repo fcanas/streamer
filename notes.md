@@ -287,7 +287,7 @@ Compatibility 4 or greater. A little unclear, but each media segment needs to co
 | `FORCED`   | NO       | enumerated-string | `YES` or `NO`. Absence is implicit `NO`. Must only appear for `TYPE=SUBTITLES`. `YES` means content is essential (_e.g._ Elvish?) |
 | `INSTREAM-ID` | NO    | quoted-string     | For closed-captions. See spec |
 | `CHARACTERISTICS` | NO | quoted-string    | comma-separated UTIs |
-| `CHANNELS`  | NO      | quoted-string     | "/"-separated list of parameters. The first is the number of independent audio channels. Should be present if `TYPE` is `AUDIO`. Required if a Master Playlist contains two renditions encoded with the same codec but a different number of channels. |
+| `CHANNELS`  | NO      | quoted-string     | "/"-separated list of parameters. The first is the maximum number of independent audio channels. Should be present if `TYPE` is `AUDIO`. Required if a Master Playlist contains two renditions encoded with the same codec but a different number of channels. |
 
 [Rendition groups](https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-4.3.4.1.1) represent alternate rendition of the same content. They need the same `GROUP-ID`, different `NAME`, no more than one `DEFAULT` member, and `AUTOSELECT` members must have a `LANGUAGE` attribute.
 
