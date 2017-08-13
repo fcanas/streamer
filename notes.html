@@ -10,141 +10,115 @@
 <main>
 
 <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-notes-from-hls-draft-spec" class="anchor" href="#notes-from-hls-draft-spec" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Notes From HLS Draft Spec</h1>
-
-<p><a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-1">HTTP Live Streaming</a></p>
-
+<p><a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-23">HTTP Live Streaming</a></p>
 <p>This is not intended to replace above linked document. Expect errors,
 simplifications, and editorialization.</p>
-
 <h2><a id="user-content-overview-of-playlists-and-streams" class="anchor" href="#overview-of-playlists-and-streams" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview of Playlists and Streams</h2>
-
 <ul>
-<li>Playlists must be UTF-8 according to <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-1">draft</a></li>
+<li>Playlists must be UTF-8</li>
 <li>Master Playlists</li>
 <li>Variant Streams</li>
 <li>Media Playlists
-
 <ul>
 <li>Single format, resolution, and bitrate within a media playlist</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2><a id="user-content-media-segments" class="anchor" href="#media-segments" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Media Segments</h2>
-
 <ul>
 <li>URI</li>
 <li>Optional Byte range</li>
 <li>Duration in required <a href="#EXINF"><code>EXTINF</code></a> tag</li>
-<li>Segments have a "Media Sequence Number"
-
-<ul>
+<li>Segments have a "Media Sequence Number"</li>
 <li>First segment can be explicitly numbered, or an implicit 0</li>
 <li>Subsequent segments are implicitly numbered one more than the preceding segment.</li>
-</ul></li>
 <li>Must be encoded as
-
 <ul>
 <li><a href="http://www.iso.org/iso/catalogue_detail?csnumber=44169">MPEG-2 Transport Stream</a></li>
 <li><a href="https://w3c.github.io/webvtt/">Web VTT</a> (Web Video Text Tracks)</li>
 <li>Various audio + ID3 tag packing</li>
-</ul></li>
+</ul>
+</li>
 <li>Media Initialization Section
-
 <ul>
 <li>MPEG streams Program Association Table (PAT) and Program Map Table (PMT)
-
 <ul>
 <li>may be provided with each segment</li>
 <li>may be declared in the <a href="#EXT-X-MAP"><code>EXT-X-MAP</code></a> tag</li>
-</ul></li>
+</ul>
+</li>
 <li>WebVTT initialization is a WebVTT header</li>
 <li>Packed audio has no media initialization</li>
-</ul></li>
+</ul>
+</li>
 <li>Subtitle (VTT) segments are synchronized with timestamp tags <em>e.g.</em> <code>X-TIMESTAMP-MAP=LOCAL:&lt;cue time&gt;,MPEGTS:&lt;MPEG-2 time&gt;</code>, or assumed to start with corresponding MPEG segment.</li>
 </ul>
-
 <h2><a id="user-content-playlists" class="anchor" href="#playlists" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Playlists</h2>
-
 <p>Apparently, clients MUST fail to parse invalid playlists.</p>
-
 <ul>
 <li>Must be identifiable by one of two forms:
-
 <ul>
 <li>path component of URI ending
-
 <ul>
 <li><code>m3u8</code></li>
 <li><code>m3u</code></li>
-</ul></li>
+</ul>
+</li>
 <li>HTTP <code>Content-type</code> MUST be <code>application/vnd.apple.mpegurl</code> or <code>audio/mpegurl</code></li>
-</ul></li>
+</ul>
+</li>
 <li>Clients <em>should</em> fail to parse otherwise</li>
 </ul>
-
 <p>There are some rules about bitrate. There seem to be 3 distinctly defined bitrate defitions:</p>
-
 <ol>
 <li>Segment Bitrate</li>
 <li>Peak Segment Bitrate</li>
 <li>Average Segment Bitrate</li>
 </ol>
-
 <h2><a id="user-content-playlist-definition" class="anchor" href="#playlist-definition" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Playlist Definition</h2>
-
 <ul>
 <li>Playlists <em>must</em> be encoded in <code>UTF-8</code> with no <code>BOM</code> or control characters except <code>CR</code> and <code>LF</code></li>
 <li>Lines end in single <code>LF</code> or <code>CRLF</code></li>
 <li>No white space unless specified</li>
 <li>Each line is
-
 <ul>
 <li><code>URI</code>
-
 <ul>
 <li>Media Segment</li>
 <li>Playlist File</li>
-</ul></li>
+</ul>
+</li>
 <li>Blank (ignored)</li>
 <li>starts with <code>#</code>
-
 <ul>
 <li>Tags start with <code>#EXT</code> and are case-sensitive</li>
 <li>otherwise is a comment and ignored</li>
-</ul></li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
+</li>
+</ul>
 <h2><a id="user-content-playlist-types" class="anchor" href="#playlist-types" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Playlist Types</h2>
-
 <p>There are two kinds of playlists. No other playlists are valid.</p>
-
 <ul>
 <li>Master Playlist
-
 <ul>
 <li>All URI lines identify media playlists</li>
-</ul></li>
+</ul>
+</li>
 <li>Media Playlist
-
 <ul>
 <li>All URI lines identify media segments</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>Relative URIs are relative to the playlist that contains them.</p>
-
 <h2><a id="user-content-attribute-lists" class="anchor" href="#attribute-lists" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Attribute Lists</h2>
-
 <p>Attribute lists are comma-separated key value pairs with the format:</p>
-
 <pre><code>AttributeName=AttributeValue
 </code></pre>
-
 <p><code>AttributeName</code> matches <code>[A..Z]</code>, <code>[0..9]</code> and <code>-</code></p>
-
 <p><code>AttributeValue</code> is one of 7 types:</p>
-
 <ol>
 <li><code>decimal-integer</code> : <code>[0..9]</code>, in range 0 to 2^64-1 (implies 1 to 20 digits)</li>
 <li><code>hexidecimal-sequence</code> : <code>0x</code> or <code>0X</code> prefix with characters <code>[0..9]</code>, <code>[A..F]</code>. Max length variable.</li>
@@ -154,33 +128,20 @@ simplifications, and editorialization.</p>
 <li><code>enumerated-string</code> : unquoted string pre-defined by the <code>Attribute</code> it's used in. will never contain <code>"</code>, <code>'</code>, or whitespace.</li>
 <li><code>decimal-resolution</code> : two <code>decimal-integer</code> separated by <code>x</code> define a width and a height</li>
 </ol>
-
 <p><code>AttributeName</code> defines the allowed types for <code>AttributeValue</code>. An <code>AttributeName</code> must not appear more than once in an attribute list. Clients shouldn't play lists that break the rule.</p>
-
 <h2><a id="user-content-playlist-tags" class="anchor" href="#playlist-tags" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Playlist Tags</h2>
-
 <h3><a id="user-content-extm3u" class="anchor" href="#extm3u" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXTM3U</code></h3>
-
 <p>Necessarily the first line of a playlist.</p>
-
 <h3><a id="user-content-ext-x-version" class="anchor" href="#ext-x-version" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-VERSION</code></h3>
-
 <pre><code>EXT-X-VERSION:&lt;n&gt;
 </code></pre>
-
 <p><code>n</code> is the compatibility version. Appears in all versions that aren't compatible with version 1. If more than one version tag appears in a playlist, the player must reject the playlist.</p>
-
 <h2><a id="user-content-media-segment-tags" class="anchor" href="#media-segment-tags" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Media Segment Tags</h2>
-
 <p>Some number of media segment tags appear before media segment URIs. The only appear in media playlists, and cannot appear in master playlists.</p>
-
 <h3><a id="user-content-extinf" class="anchor" href="#extinf" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXTINF</code></h3>
-
 <p>Applies only to the next media segment.</p>
-
 <pre><code>#EXTINF:&lt;duration&gt;,[&lt;title&gt;]
 </code></pre>
-
 <ul>
 <li>Required tag per segment</li>
 <li><code>duration</code> is decimal float or integer</li>
@@ -189,27 +150,20 @@ simplifications, and editorialization.</p>
 <li><code>[]</code> denotes optional</li>
 <li><code>title</code> is a human-readable title of the segment</li>
 </ul>
-
 <h3><a id="user-content-ext-x-byterange" class="anchor" href="#ext-x-byterange" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-BYTERANGE</code></h3>
-
 <p>Applies only to the next media segment. Indicates the next segment is defined by a range in the resource indicated by its URI. If tag isn't present, the segment is the entire resource specified by the URI.</p>
-
 <pre><code>#EXT-X-BYTERANGE:&lt;n&gt;[@&lt;o&gt;]
 </code></pre>
-
 <ul>
 <li><code>n</code> a decimal integer indicating the length of the range in bytes</li>
 <li><code>o</code> a decimal integer indicating the start of the subrange as a byte-offset
-
 <ul>
 <li>if not present, begins at the next byte following subrange of previous segment, and a previous resource must exist that is also a subrange of the same resource as the segment this tag applies to.</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h3><a id="user-content-ext-x-discontinuity" class="anchor" href="#ext-x-discontinuity" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-DISCONTINUITY</code></h3>
-
 <p>Discontinuity must be present if there's a change in</p>
-
 <ul>
 <li>file format</li>
 <li>number, type and identifiers of tracks</li>
@@ -218,22 +172,20 @@ and should be present for changes in</li>
 <li>encoding parameters</li>
 <li>encoding sequence</li>
 </ul>
-
 <h3><a id="user-content-ext-x-key" class="anchor" href="#ext-x-key" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-KEY</code></h3>
-
 <p>Specifies how to decrypt segments. Applies to all segments after the tag until another <code>EXT-X-KEY</code> appears.</p>
-
 <pre><code>#EXT-X-KEY:&lt;attribute-list&gt;
 </code></pre>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Attribute</th>
 <th align="center">Required</th>
 <th>Type</th>
 <th></th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td><code>METHOD</code></td>
 <td align="center">YES</td>
@@ -263,28 +215,23 @@ and should be present for changes in</li>
 <td align="center">NO</td>
 <td>quoted-string</td>
 <td>Version &gt;= 5. Integers separated by "/", indicates version compatibility of key?</td>
-</tr>
-</tbody></table>
-
+</tr></tbody></table>
 <p>If tag is missing, content is not encrypted.</p>
-
 <p>See sections <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-4.3.2.4">4.3.2.4</a> and <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-5.2">5.2</a> for more</p>
-
 <h3><a id="user-content-ext-x-map" class="anchor" href="#ext-x-map" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-MAP</code></h3>
-
 <p>Media initialization</p>
-
 <pre><code>#EXT-X-MAP:&lt;attribute-list&gt;
 </code></pre>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Attribute</th>
 <th align="center">Required</th>
 <th align="center">Type</th>
 <th></th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td><code>URI</code></td>
 <td align="center">YES</td>
@@ -296,31 +243,25 @@ and should be present for changes in</li>
 <td align="center">NO</td>
 <td align="center">quoted-string</td>
 <td>Byterange quoted string to location of MIS in the resource specified by the URI</td>
-</tr>
-</tbody></table>
-
+</tr></tbody></table>
 <h3><a id="user-content-ext-x-program-date-time" class="anchor" href="#ext-x-program-date-time" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-PROGRAM-DATE-TIME</code></h3>
-
 <p>Associates the first sample of the segment with an absolute date. Applies only to the next segment. The date/time is formatted in <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#ref-ISO_8601">ISO-8601</a> and should both indicate time zone and fractional seconds. It <em>should</em> provide millisecond accuracy.</p>
-
-<pre><code>#EXT-X-PROGRAM-DATE-TIME:&lt;YYYY-MM-DDThh:mm:ssZ&gt;
+<pre><code>#EXT-X-PROGRAM-DATE-TIME:&lt;YYYY-MM-DDThh:mm:SSSZ&gt;
 </code></pre>
-
 <h3><a id="user-content-ext-x-daterange" class="anchor" href="#ext-x-daterange" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-DATERANGE</code></h3>
-
 <p>Associates tags with date ranges</p>
-
 <pre><code>#EXT-X-DATERANGE:&lt;attribute-list&gt;
 </code></pre>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th><code>AttributeName</code></th>
 <th align="center">Required</th>
 <th align="center">Type</th>
 <th></th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td><code>ID</code></td>
 <td align="center">YES</td>
@@ -386,72 +327,47 @@ and should be present for changes in</li>
 <td align="center">NO</td>
 <td align="center"></td>
 <td>value must be YES. Indicates the range ends at the start of the range with the same <code>CLASS</code> with the earliest <code>START-DATE</code> after this range's <code>START-DATE</code>. Range <em>must</em> have a <code>CLASS</code>, and cannot overlap with ranges with the same <code>CLASS</code>. Use of tag means you can't use <code>END-DATE</code> or <code>DURATION</code></td>
-</tr>
-</tbody></table>
-
+</tr></tbody></table>
 <h4><a id="user-content-scte-35" class="anchor" href="#scte-35" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SCTE-35</h4>
-
 <p>SCTE-35 is for splicing in ads. <a href="http://www.scte.org/documents/pdf/Standards/ANSI_SCTE%2035%202014.pdf">spec</a></p>
-
 <h2><a id="user-content-media-playlist-tags" class="anchor" href="#media-playlist-tags" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Media Playlist Tags</h2>
-
 <p>Media Playlist Tags describe global playlist parameters. A single tag must not appear more than once in a playlist, an no such tag can appear in a master playlist.</p>
-
 <h3><a id="user-content-ext-x-targetduration" class="anchor" href="#ext-x-targetduration" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-TARGETDURATION</code></h3>
-
 <p>This tag is required.</p>
-
 <pre><code>#EXT-X-TARGETDURATION:&lt;s&gt;
 </code></pre>
-
 <p><code>s</code> is a decimal-integer in seconds. All segments in the media playlist <em>must</em> be less than or equal to <code>s</code> in length when rounded to the nearest integer.</p>
-
 <h3><a id="user-content-ext-x-media-sequence" class="anchor" href="#ext-x-media-sequence" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-MEDIA-SEQUENCE</code></h3>
-
 <pre><code>#EXT-X-MEDIA-SEQUENCE:&lt;number&gt;
 </code></pre>
-
 <p><code>number</code> is a decimal-integer indicates the number of the first segment in the playlist. Matching numbers across playlists <em>do not</em> indicate matching content. The absence of this tag indicates the first segment number is 0. If it <em>does</em> appear, it must appear before the first media segment in the file. The URI does not need to contain its segment number.</p>
-
 <h3><a id="user-content-ext-x-discontinuity-sequence" class="anchor" href="#ext-x-discontinuity-sequence" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-DISCONTINUITY-SEQUENCE</code></h3>
-
 <pre><code>#EXT-X-DISCONTINUITY-SEQUENCE:&lt;number&gt;
 </code></pre>
-
 <p>The discontinuity sequence tag must appear before the first media segment in the playlist and before any <code>EXT-X-DISCONTINUITY</code> tag. If it's absent, discontinuity 0 is assumed.</p>
-
 <h3><a id="user-content-ext-x-endlist" class="anchor" href="#ext-x-endlist" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-ENDLIST</code></h3>
-
 <p>No more media segments will be added to the playlist.</p>
-
 <h3><a id="user-content-ext-x-playlist-type" class="anchor" href="#ext-x-playlist-type" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-PLAYLIST-TYPE</code></h3>
-
 <p>An optional tag applying to the whole file.</p>
-
 <pre><code>#EXT-X-PLAYLIST-TYPE:&lt;EVENT|VOD&gt;
 </code></pre>
-
 <p>If the type is <code>EVENT</code>, media segments can only be added to the end. If it's <code>VOD</code>, the playlist will not change.</p>
-
 <h3><a id="user-content-ext-x-i-frames-only" class="anchor" href="#ext-x-i-frames-only" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-I-FRAMES-ONLY</code></h3>
-
 <p>Compatibility 4 or greater. A little unclear, but each media segment needs to contain an I-Frame. Facilitates or enables seeking.</p>
-
 <h2><a id="user-content-master-playlist-tags" class="anchor" href="#master-playlist-tags" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>Master Playlist Tags</code></h2>
-
 <h3><a id="user-content-ext-x-media" class="anchor" href="#ext-x-media" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-MEDIA</code></h3>
-
 <pre><code>#EXT-X-MEDIA:&lt;attribute-list&gt;
 </code></pre>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Attribute</th>
 <th align="center">Required</th>
 <th align="center">Type</th>
 <th></th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td><code>TYPE</code></td>
 <td align="center">YES</td>
@@ -518,24 +434,27 @@ and should be present for changes in</li>
 <td align="center">quoted-string</td>
 <td>comma-separated UTIs</td>
 </tr>
-</tbody></table>
-
+<tr>
+<td><code>CHANNELS</code></td>
+<td align="center">NO</td>
+<td align="center">quoted-string</td>
+<td>"/"-separated list of parameters. The first is the maximum number of independent audio channels. Should be present if <code>TYPE</code> is <code>AUDIO</code>. Required if a Master Playlist contains two renditions encoded with the same codec but a different number of channels.</td>
+</tr></tbody></table>
 <p><a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-4.3.4.1.1">Rendition groups</a> represent alternate rendition of the same content. They need the same <code>GROUP-ID</code>, different <code>NAME</code>, no more than one <code>DEFAULT</code> member, and <code>AUTOSELECT</code> members must have a <code>LANGUAGE</code> attribute.</p>
-
 <h3><a id="user-content-ext-x-stream-inf" class="anchor" href="#ext-x-stream-inf" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-STREAM-INF</code></h3>
-
 <pre><code>#EXT-X-STREAM-INF:&lt;attribute-list&gt;
 &lt;URI&gt;
 </code></pre>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Attribute</th>
 <th align="center">Required</th>
 <th align="center">Type</th>
 <th></th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td><code>BANDWIDTH</code></td>
 <td align="center">YES</td>
@@ -565,6 +484,12 @@ and should be present for changes in</li>
 <td align="center">NO</td>
 <td align="center">decimal-floating-point</td>
 <td>Maximum frame rate for all video in the variant stream. Rounded to 3 decimal places. Should be present if video is ever &gt;30fps</td>
+</tr>
+<tr>
+<td><code>HDCP-LEVEL</code></td>
+<td align="center">NO</td>
+<td align="center">enumerated-string</td>
+<td><code>TYPE-0</code> or <code>NONE</code>. Should be present if conten't won't play without <a href="http://www.digital-cp.com/sites/default/files/specifications/HDCP%20on%20HDMI%20Specification%20Rev2_2_Final1.pdf">HDCP</a>. Clients without copy protection shoudn't load a variant with <code>HDCP-LEVEL</code> that isn't <code>NONE</code>.</td>
 </tr>
 <tr>
 <td><code>AUDIO</code></td>
@@ -589,31 +514,27 @@ and should be present for changes in</li>
 <td align="center">NO</td>
 <td align="center">quoted-string</td>
 <td>Must match GROUP-ID attribute of an EXT-X-MEDIA tag with an <code>CLOSED-CAPTIONS</code> type</td>
-</tr>
-</tbody></table>
-
+</tr></tbody></table>
 <p>When an <code>EXT-X-STREAM-INF</code> tag contains an <code>AUDIO</code>, <code>VIDEO</code>, <code>SUBTITLES</code>, or <code>CLOSED-CAPTIONS</code> attribute, it indicates that alternative Renditions of the content are available for playback of that Variant Stream with some <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-19#section-4.3.4.2.1">constraints</a>.</p>
-
 <h3><a id="user-content-ext-x-i-frame-stream-inf" class="anchor" href="#ext-x-i-frame-stream-inf" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-I-FRAME-STREAM-INF</code></h3>
-
 <pre><code>#EXT-X-I-FRAME-STREAM-INF:&lt;attribute-list&gt;
 </code></pre>
-
 <blockquote>
 <p>The EXT-X-I-FRAME-STREAM-INF tag identifies a Media Playlist file
-  containing the I-frames of a multimedia presentation.  It stands
-  alone, in that it does not apply to a particular URI in the Master
-  Playlist.</p>
+containing the I-frames of a multimedia presentation.  It stands
+alone, in that it does not apply to a particular URI in the Master
+Playlist.</p>
 </blockquote>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Attribute</th>
 <th align="center">Required</th>
 <th align="center">Type</th>
 <th></th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td><code>BANDWIDTH</code></td>
 <td align="center">YES</td>
@@ -639,34 +560,25 @@ and should be present for changes in</li>
 <td>Recommended for video content</td>
 </tr>
 <tr>
-<td><code>FRAME-RATE</code></td>
-<td align="center">NO</td>
-<td align="center">decimal-floating-point</td>
-<td>Maximum frame rate for all video in the variant stream. Rounded to 3 decimal places. Should be present if video is ever &gt;30fps</td>
-</tr>
-<tr>
 <td><code>URI</code></td>
 <td align="center">NO</td>
 <td align="center">quoted-string</td>
 <td>Identifies media playlist file</td>
-</tr>
-</tbody></table>
-
+</tr></tbody></table>
 <h3><a id="user-content-ext-x-session-data" class="anchor" href="#ext-x-session-data" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-SESSION-DATA</code></h3>
-
 <p>Allows session data to be carried in the master playlist.</p>
-
 <pre><code>#EXT-X-SESSION-DATA:&lt;attribute-list&gt;
 </code></pre>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Attribute</th>
 <th align="center">Required</th>
 <th align="center">Type</th>
 <th></th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td><code>DATA-ID</code></td>
 <td align="center">YES</td>
@@ -690,24 +602,21 @@ and should be present for changes in</li>
 <td align="center">NO</td>
 <td align="center">quoted-string</td>
 <td><a href="https://tools.ietf.org/html/rfc5646">RFC5646</a></td>
-</tr>
-</tbody></table>
-
+</tr></tbody></table>
 <p>More than one session tag with the same <code>DATA-ID</code> may be present as long as they don't have overlapping <code>LANGUAGE</code>.</p>
-
 <h3><a id="user-content-ext-x-session-key" class="anchor" href="#ext-x-session-key" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-SESSION-KEY</code></h3>
-
 <pre><code>#EXT-X-SESSION-KEY:&lt;attribute-list&gt;
 </code></pre>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Attribute</th>
 <th align="center">Required</th>
 <th>Type</th>
 <th></th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td><code>METHOD</code></td>
 <td align="center">YES</td>
@@ -737,34 +646,26 @@ and should be present for changes in</li>
 <td align="center">NO</td>
 <td>quoted-string</td>
 <td>Version &gt;= 5. Integers separated by "/", indicates version compatibility of key?</td>
-</tr>
-</tbody></table>
-
+</tr></tbody></table>
 <p>Should match a <code>EXT-X-KEY</code> with the same method, <code>KEYFORMAT</code>, and <code>KEYFORMATVERSIONS</code>. Should be present if multiple variants use same encryption keys.</p>
-
 <h2><a id="user-content-media-or-master-playlist-tags" class="anchor" href="#media-or-master-playlist-tags" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Media or Master Playlist Tags</h2>
-
 <p>These tags can only appear once in a playlist. They shouldn't appear in both a master and a media playlist. If they do, the values in the Master Playlist should apply, and those in the Media Playlist should be ignored.</p>
-
 <h3><a id="user-content-ext-x-independent-segments" class="anchor" href="#ext-x-independent-segments" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-INDEPENDENT-SEGMENTS</code></h3>
-
 <p>Media segments are encoded independently.</p>
-
 <h3><a id="user-content-ext-x-start" class="anchor" href="#ext-x-start" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EXT-X-START</code></h3>
-
 <p>The preferred point to start playing a playlist.</p>
-
 <pre><code>#EXT-X-START:&lt;attribute-list&gt;
 </code></pre>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Attribute</th>
 <th align="center">Required</th>
 <th>Type</th>
 <th></th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td><code>TIME-OFFSET</code></td>
 <td align="center">YES</td>
@@ -776,11 +677,8 @@ and should be present for changes in</li>
 <td align="center">NO</td>
 <td>enumerated-string</td>
 <td><code>YES</code> or <code>NO</code>. If yes, then presentation should start at <code>TIME-OFFSET</code> and media before that point should not be rendered. If <code>NO</code>, then the whole segment containing <code>TIME-OFFSET</code> should be rendered.</td>
-</tr>
-</tbody></table>
-
+</tr></tbody></table>
 <h2><a id="user-content-client-responsibilities" class="anchor" href="#client-responsibilities" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Client Responsibilities</h2>
-
 <ul>
 <li>Clients must support HTTP.</li>
 <li>If clients encounter a <code>EXT-X-VERSION</code> tag with a higher version than supported, they <em>must</em> stop playback.</li>
@@ -788,25 +686,21 @@ and should be present for changes in</li>
 <li>ignore attribute/value pair with unrecognized AttributeName</li>
 <li>ignore attribute/value pair with enumerated-string value type, recognized AttributeName and unrecognized enumerated value unless otherwise specified</li>
 </ul>
-
 <h3><a id="user-content-playback" class="anchor" href="#playback" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Playback</h3>
-
 <ul>
 <li>Don't start less than 3 segments from the end unless there is a <code>EXT-X-ENDLIST</code> tag</li>
 <li>Periodically reload playlist unless
-
 <ul>
 <li><code>EXT-X-PLAYLIST-TYPE</code> tag with a value of <code>VOD</code></li>
 <li><code>EXT-X-PLAYLIST-TYPE</code> tag with a value of <code>EVENT</code> and the <code>EXT-X-ENDLIST</code> is present</li>
-</ul></li>
+</ul>
+</li>
 <li>On first load, or subsequent load with new content, client must wait at least <em>target duration</em> before reloading</li>
 <li>On subsequent loads with no new content, client must wait at least one half of <em>target duration</em> before reloading</li>
 <li>Subsequent loads should verify that segment sequence number and URI are stable <em>w.r.t.</em> previous loads, and fail otherwise due to server error.</li>
 <li>Do <em>not</em> use Media Sequence Number to synchronize between streams. Load single alternate playlist, and use time stamps to synchronize.</li>
 </ul>
-
 <h4><a id="user-content-decryption" class="anchor" href="#decryption" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Decryption</h4>
-
 <p>TODO</p>
 </article>
 </main>
